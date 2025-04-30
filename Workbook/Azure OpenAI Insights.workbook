@@ -59,7 +59,11 @@
             },
             "defaultValue": "value::all",
             "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources"
+            "resourceType": "microsoft.resourcegraph/resources",
+            "value": [
+              "/subscriptions/8bd05b2f-62c5-4def-9869-f0617ebb3970/resourceGroups/RG-APIOPS-DEV-EASTUS2-001/providers/Microsoft.CognitiveServices/accounts/ai-apiops-dev-eastus2-001",
+              "/subscriptions/8bd05b2f-62c5-4def-9869-f0617ebb3970/resourceGroups/RG-APIOPS-PROD-EASTUS2-001/providers/Microsoft.CognitiveServices/accounts/ai-apiops-prod-eastus2-001"
+            ]
           },
           {
             "id": "c4b69c01-2263-4ada-8d9c-43433b739ff3",
@@ -113,7 +117,7 @@
               "allowCustom": true
             },
             "value": {
-              "durationMs": 2592000000
+              "durationMs": 86400000
             }
           },
           {
@@ -212,6 +216,14 @@
                   "linkTarget": "parameter",
                   "linkLabel": "Insights",
                   "subTarget": "Insights",
+                  "style": "link"
+                },
+                {
+                  "id": "d123028a-29e9-495a-9d74-7154820119c4",
+                  "cellValue": "selectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Consumption by Charge Codes",
+                  "subTarget": "ConsumptionByChargeCode",
                   "style": "link"
                 }
               ]
@@ -3692,6 +3704,41 @@
             "name": "group - Monitor"
           },
           {
+            "type": 9,
+            "content": {
+              "version": "KqlParameterItem/1.0",
+              "parameters": [
+                {
+                  "id": "dd5ae816-652c-4901-985b-621749f488a4",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "appInsights",
+                  "label": "Application Insights",
+                  "type": 5,
+                  "isRequired": true,
+                  "multiSelect": true,
+                  "quote": "'",
+                  "delimiter": ",",
+                  "query": "where type == 'microsoft.insights/components'\r\n| project value = id, label = id, selected = false, group = resourceGroup",
+                  "typeSettings": {
+                    "additionalResourceOptions": []
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources",
+                  "value": [
+                    "/subscriptions/8bd05b2f-62c5-4def-9869-f0617ebb3970/resourceGroups/RG-APIOPS-DEV-EASTUS2-001/providers/microsoft.insights/components/appi-apiops-dev-eastus2-001"
+                  ]
+                }
+              ],
+              "style": "pills",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources"
+            },
+            "name": "parameters - 6"
+          },
+          {
             "type": 12,
             "content": {
               "version": "NotebookGroup/1.0",
@@ -3773,7 +3820,10 @@
                         },
                         "timeContextFromParameter": "TimeRange",
                         "queryType": 1,
-                        "resourceType": "microsoft.resourcegraph/resources"
+                        "resourceType": "microsoft.resourcegraph/resources",
+                        "value": [
+                          "/subscriptions/8bd05b2f-62c5-4def-9869-f0617ebb3970"
+                        ]
                       },
                       {
                         "id": "9ffb6564-df12-41cc-b55d-495e7855d606",
@@ -3803,7 +3853,10 @@
                           "durationMs": 86400000
                         },
                         "queryType": 1,
-                        "resourceType": "microsoft.resourcegraph/resources"
+                        "resourceType": "microsoft.resourcegraph/resources",
+                        "value": [
+                          "/subscriptions/8bd05b2f-62c5-4def-9869-f0617ebb3970/resourceGroups/RG-APIOPS-DEV-EASTUS2-001/providers/Microsoft.OperationalInsights/workspaces/log-apiops-dev-eastus2-001"
+                        ]
                       }
                     ],
                     "style": "above",
@@ -3846,7 +3899,10 @@
                         "timeContextFromParameter": "TimeRange",
                         "defaultValue": "value::all",
                         "queryType": 0,
-                        "resourceType": "microsoft.operationalinsights/workspaces"
+                        "resourceType": "microsoft.operationalinsights/workspaces",
+                        "value": [
+                          "value::all"
+                        ]
                       },
                       {
                         "id": "6174e5f6-deff-412d-891a-0f681c2fffd5",
@@ -3874,7 +3930,10 @@
                         "timeContextFromParameter": "TimeRange",
                         "defaultValue": "value::all",
                         "queryType": 0,
-                        "resourceType": "microsoft.operationalinsights/workspaces"
+                        "resourceType": "microsoft.operationalinsights/workspaces",
+                        "value": [
+                          "value::all"
+                        ]
                       },
                       {
                         "id": "fe5605b0-a404-4251-9449-a2f92a8cd6ca",
@@ -3902,7 +3961,10 @@
                         "timeContextFromParameter": "TimeRange",
                         "defaultValue": "value::all",
                         "queryType": 0,
-                        "resourceType": "microsoft.operationalinsights/workspaces"
+                        "resourceType": "microsoft.operationalinsights/workspaces",
+                        "value": [
+                          "value::all"
+                        ]
                       },
                       {
                         "id": "79a79007-6e1c-4fd5-b0f0-211aef3dec54",
@@ -6477,6 +6539,123 @@
               "value": "Insights"
             },
             "name": "group - Insights"
+          },
+          {
+            "type": 12,
+            "content": {
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "items": [
+                {
+                  "type": 10,
+                  "content": {
+                    "chartId": "workbookd3cf2b01-08c6-473e-8cc1-5206972a6d7c",
+                    "version": "MetricsItem/2.0",
+                    "size": 0,
+                    "chartType": 2,
+                    "resourceType": "microsoft.insights/components",
+                    "metricScope": 0,
+                    "resourceParameter": "appInsights",
+                    "resourceIds": [
+                      "{appInsights}"
+                    ],
+                    "timeContextFromParameter": "TimeRange",
+                    "timeContext": {
+                      "durationMs": 86400000
+                    },
+                    "metrics": [
+                      {
+                        "namespace": "microsoft.insights/components/kusto",
+                        "metric": "microsoft.insights/components/kusto-Custom-customMetrics/Total Tokens",
+                        "aggregation": 4,
+                        "splitBy": [
+                          "customDimensions/Product ID"
+                        ]
+                      }
+                    ],
+                    "title": "Total Tokens",
+                    "gridSettings": {
+                      "rowLimit": 10000
+                    }
+                  },
+                  "name": "metric - 0"
+                }
+              ]
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "ConsumptionByChargeCode"
+            },
+            "name": "ChargeCodes"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbook89c48ca7-9a9f-4e74-85c6-df400b5e17df",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 2,
+              "resourceType": "microsoft.insights/components",
+              "metricScope": 0,
+              "resourceParameter": "appInsights",
+              "resourceIds": [
+                "{appInsights}"
+              ],
+              "timeContextFromParameter": "TimeRange",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "metrics": [
+                {
+                  "namespace": "api management",
+                  "metric": "api management--Completion Tokens",
+                  "aggregation": 4,
+                  "splitBy": [
+                    "Product ID"
+                  ]
+                }
+              ],
+              "title": "Completion Tokens",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "name": "metric - 6"
+          },
+          {
+            "type": 10,
+            "content": {
+              "chartId": "workbook19bc4d7c-4776-4334-9c69-a6c13fbbea1a",
+              "version": "MetricsItem/2.0",
+              "size": 0,
+              "chartType": 2,
+              "resourceType": "microsoft.insights/components",
+              "metricScope": 0,
+              "resourceParameter": "appInsights",
+              "resourceIds": [
+                "{appInsights}"
+              ],
+              "timeContextFromParameter": "TimeRange",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "metrics": [
+                {
+                  "namespace": "api management",
+                  "metric": "api management--Prompt Tokens",
+                  "aggregation": 4,
+                  "splitBy": [
+                    "Product ID"
+                  ]
+                }
+              ],
+              "title": "Prompt Tokens",
+              "gridSettings": {
+                "rowLimit": 10000
+              }
+            },
+            "name": "metric - 7"
           }
         ]
       },
@@ -6489,7 +6668,7 @@
     }
   ],
   "fallbackResourceIds": [
-    "Azure Monitor"
+    "/subscriptions/8bd05b2f-62c5-4def-9869-f0617ebb3970/resourcegroups/rg-apiops-dev-eastus2-001"
   ],
   "workbookPin": "storage account metrics",
   "styleSettings": {
