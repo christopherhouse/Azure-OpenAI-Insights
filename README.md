@@ -1,3 +1,5 @@
+This repo is a fork of the excellent [Azure OpenAI Insights](https://github.com/dolevshor/Azure-OpenAI-Insights) project by [Dolev Shor](https://github.com/dolveshor). It extends the Azure OpenAI Insights Workbook to include an additional tab displaying token metrics emitted by Azure API Management.
+
 # Azure OpenAI Insights
 The 'Azure OpenAI Insights' workbook offers deep insights into Azure OpenAI usage, helping you manage costs, optimize performance, and make strategic decisions for a robust AI infrastructure.
 
@@ -125,6 +127,10 @@ Types of views this workbook provides:
       - by Api Version
       - by Operation name
       - by Stream Type
+- **APIM Token Metrics**
+  - Total Tokens by APIM Product
+  - Completion Tokens by APIM Product
+  - Prompt Tokens by APIM Product
 
 #### Filters
 
