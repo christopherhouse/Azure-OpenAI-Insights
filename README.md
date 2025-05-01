@@ -20,7 +20,9 @@ This workbook contains 3 main parts:
 - **Overview** - Holistic view of Azure OpenAI resources
 - **Monitor** - Holistic view of Azure OpenAI resources Metrics
 - **Insights** - Holistic view of Azure OpenAI resources Logs
-  - Requires by enabling Diagnostic Settings to Log Analytics Workspace.
+  - Requires enabling Diagnostic Settings to Log Analytics Workspace.
+- **APIM Token Metrics** - Total, Completion and Prompt token metrics from `azure-openai-emit-token-metric`
+  - Requires APIM Token metrics emitted by the policy `azure-openai-emit-token-metric`.
 
 ### Views
 
